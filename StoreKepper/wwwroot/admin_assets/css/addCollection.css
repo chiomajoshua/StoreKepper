@@ -1,0 +1,60 @@
+﻿
+.form-box {
+    padding-top: 40px;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.form-top {
+    overflow: hidden;
+    padding: 0 25px 15px 25px;
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    text-align: left;
+    color: #fff;
+    transition: opacity .3s ease-in-out;
+}
+
+    .form-top h3 {
+        color: #000;
+    }
+
+.form-bottom {
+    padding: 25px 25px 30px 25px;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+    text-align: left;
+    transition: all .4s ease-in-out;
+}
+
+form .form-bottom button.btn {
+    min-width: 105px;
+}
+
+form .form-bottom .input-error {
+    border-color: #d03e3e;
+    color: #d03e3e;
+}
+
+form.registration-form fieldset {
+    display: none;
+}
+
+#buttonGen {
+    background-color: #f217c3;
+    color: #fff;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.input[type=number] {
+    -moz-appearance: textfield;
+}
+

@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var username = HttpContextAccessor.HttpContext.Session.GetString("_userName");
+    var department = HttpContextAccessor.HttpContext.Session.GetString("_department");
+    var referralCode = HttpContextAccessor.HttpContext.Session.GetString("_referralCode");
+    var accessLevel = HttpContextAccessor.HttpContext.Session.GetString("_accessLevel");
+}
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="#">
+                <img src="~/images/mblogo.png" alt="EdgeReferral" style="width:60%" />
+            </a>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li><a class="nav-link" asp-area="Staff" asp-controller="Home" asp-action="Index"><i class="fa fa-h-square"></i><span>Home</span></a></li>
+            @*<li><a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="CreateEntry"><i class="fa fa-plus"></i><span>Add Entry</span></a></li>*@
+            <li><a class="nav-link" asp-area="Staff" asp-controller="Home" asp-action="ViewLeaderboard"><i class="fa fa-list-ol"></i><span>View Leaderboard</span></a></li>
+            <li><a class="nav-link" asp-area="Staff" asp-controller="Home" asp-action="MyReferrals"><i class="fa fa-eye"></i><span>My Referrals</span></a></li>
+            <li><a class="nav-link text-logout" asp-area="Staff" asp-controller="Home" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+        </ul>       
+    </aside>
+</div>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Admin Dashboard &mdash; Edge Referral</title>
+    <environment include="Development,Staging,Production">
+        <!-- General CSS Files -->
+        <link rel="stylesheet" href="~/admin_assets/modules/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/admin_assets/modules/fontawesome/css/all.min.css">
+
+        <!-- DataTables CSS Libraries-->
+        <link href="~/admin_assets/modules/datatables/datatables.min.css" rel="stylesheet" />
+        <link href="~/admin_assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+        <link href="~/admin_assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css" rel="stylesheet" />
+        <link href="~/admin_assets/modules/select2/dist/css/select2.min.css" rel="stylesheet" />
+        <link href="~/admin_assets/modules/jquery-selectric/selectric.css" rel="stylesheet" />
+        <link href="~/admin_assets/css/wizard.css" rel="stylesheet" />
+
+        <!-- Template CSS -->
+        <link rel="stylesheet" href="~/admin_assets/css/style.css">
+        <link rel="stylesheet" href="~/admin_assets/css/components.css">
+    </environment>
+</head>
+
+<body>
+    @using Microsoft.AspNetCore.Http
+    @inject IHttpContextAccessor HttpContextAccessor
+    @{
+        var username = HttpContextAccessor.HttpContext.Session.GetString("_userName");
+        var department = HttpContextAccessor.HttpContext.Session.GetString("_department");
+        var referralCode = HttpContextAccessor.HttpContext.Session.GetString("_referralCode");
+        var title = (string)ViewData["viewTitle"];
+    }
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                        @*<li>
+                                <h5 style="color:#fff;margin-top:.3em">@title</h5>
+                            </li>*@
+                    </ul>
+                </form>
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-sm-none d-lg-inline-block">
+                                Hi,
+                                @if (username != null)
+                                {@username;
+                            }
+                            else { }
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a asp-area="" asp-controller="" asp-action="" class="dropdown-item has-icon">
+                                <i class="fab fa-gitter"></i> @department
+                            </a>
+                            <a asp-area="" asp-controller="" asp-action="" class="dropdown-item has-icon">
+                                <i class="fas fa-code"></i> @referralCode
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <partial name="_adminSideBar" />
+            @RenderBody()
+        </div>
+    </div>
+    <environment include="Development,Staging,Production">
+        <!-- General JS Scripts -->
+
+        <script src="~/admin_assets/modules/jquery.min.js"></script>
+        <script src="~/admin_assets/modules/popper.js"></script>
+        <script src="~/admin_assets/modules/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/admin_assets/modules/popper.js"></script>
+        <script src="~/admin_assets/modules/tooltip.js"></script>
+        <script src="~/admin_assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="~/admin_assets/modules/moment.min.js"></script>
+        <script src="~/admin_assets/js/stisla.js"></script>
+        <!-- Page Specific JS File -->
+        @*<script src="~/admin_assets/js/page/index-0.js"></script>*@
+
+        <!--DataTables JS File-->
+        <script src="~/admin_assets/modules/datatables/datatables.min.js"></script>
+        <script src="~/admin_assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+        <script src="~/admin_assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+        <script src="~/admin_assets/modules/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/admin_assets/js/page/modules-datatables.js"></script>
+        <!-- Template JS File -->
+        <script src="~/admin_assets/js/scripts.js"></script>
+        <!--JS for wizard-->
+        <script src="~/admin_assets/vendor/jquery-validation/dist/additional-methods.js"></script>
+        <script src="~/admin_assets/vendor/jquery-steps/jquery.steps.js"></script>
+        <script src="~/admin_assets/modules/select2/dist/js/select2.full.min.js"></script>
+        <script src="~/admin_assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+        <script src="~/admin_assets/js/main.js"></script>
+    </environment>
+        @RenderSection("scripts", required: false)
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#table-1').DataTable();
+            });
+        </script>
+</body>
+
+
+</html>
