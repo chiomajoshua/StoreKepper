@@ -1,17 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StoreKeeper.Common.Infrastructure;
+using StoreKeeper.Data.Persistence;
 
 namespace StoreKepper
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -23,6 +22,19 @@ namespace StoreKepper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDIServices(services);
+            services.AddDbContext<StoreKeeperDbContext>(opts =>
+                                                        opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddRouting(options => options.LowercaseUrls = true)
+                .AddLogging()
+                .AddOptions()
+                .AddDistributedMemoryCache()
+                .AddMemoryCache();
+
+            services.AddAutoMapper(
+                 options => options.AddProfile<MappingProfile>());
+            services.AddResponseCaching();
             services.AddControllersWithViews();
         }
 
@@ -35,7 +47,7 @@ namespace StoreKepper
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -43,7 +55,7 @@ namespace StoreKepper
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseResponseCaching();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
