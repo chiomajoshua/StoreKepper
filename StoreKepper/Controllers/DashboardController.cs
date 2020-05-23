@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StoreKepper.Controllers
 {
-    public class ProductController : Controller
+    public class DashboardController : Controller
     {
-        public IActionResult Index()
+        public DashboardController()
+        {
+
+        }
+        public IActionResult Home()
         {
             return View();
         }
